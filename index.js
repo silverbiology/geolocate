@@ -2,20 +2,23 @@ var geolocate = function() {
 
 	var needle = require('needle');
 	var route = "http://www.museum.tulane.edu/webservices/geolocatesvcv2/glcwrap.aspx";
-	
+
 	var me = this;
-	this.country = 'USA';
-	this.state = 'LA';
-	this.county = '';
-	this.language = 0;
-	this.enableH2O = true;
-	this.enableHwy = true;
-	this.restrictToLowestAdm = false;
-	this.enableUncert = true;
-	this.doPoly = true;
-	this.displacePoly = false;
+
+	var setDefaultValues = function() {
+		me.country = '';
+		me.state = '';
+		me.county = '';
+		me.language = 0;
+		me.enableH2O = true;
+		me.enableHwy = true;
+		me.restrictToLowestAdm = false;
+		me.enableUncert = true;
+		me.doPoly = true;
+		me.displacePoly = false;
+	}
 	
-	// this.lastResults = null;
+	setDefaultValues();
 	
 	this.setCountry = function( country ) {
 		me.country = country;
@@ -57,8 +60,12 @@ var geolocate = function() {
 		me.displacePoly = displacePoly;
 	}
 
+	this.clearValues = function() {
+		setDefaultValues();
+	}
+	
 	this.find = function( locality, resultFlag, callback ) {
-		if(!locality || locality == '' || me.country == '' ) return false;
+		if(!locality || locality == '' || me.country == '' ) return callback({success:false,message:"Locality and Country should be set."});
 		resultFlag = ('undefined' == typeof resultFlag || resultFlag == false) ? false : true;
 		var params = ['country','state','county','language','enableH2O','enableHwy','restrictToLowestAdm','enableUncert','doPoly','displacePoly'];
 		var req = route + '?';
@@ -77,18 +84,7 @@ var geolocate = function() {
 			}
 		});
 	}
-	
-	// this.getResult = function() {
-		// return this.lastResults;
-	// }
-	
-	// this.getResultSet = function() {
-		// if (me.lastResults) {
-			// return me.lastResults.resultSet;
-		// }
-		// return null;
-	// }
-	
+
 };
 
 module.exports = geolocate;

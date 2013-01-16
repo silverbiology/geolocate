@@ -1,0 +1,31 @@
+{
+    "name" : "geolocate",
+    "version" : "0.1.0",
+    "description" : "Geolocate.",
+	"homepage" : "https://github.com/silverbiology/geolocate",
+    "main" : "./index.js",
+    "directories" : {
+        "lib" : ".",
+        "test" : "test",
+        "example" : "example"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" : "http://github.com/silverbiology/geolocate.git"
+    },
+    "keywords" : [
+        "geolocate"
+    ],
+    "author" : {
+        "name" : "SilverBiology",
+        "email" : "contact@silverbiology.com",
+        "url" : "http://www.silverbiology.com"
+    },
+    "license" : "",
+    "engine" : {
+        "node" : ">=0.6"
+    },
+	"dependencies": {
+		"needle": "*"
+	}
+}
